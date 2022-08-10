@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Header from './components/Header';
+import TransactionsList from './pages/TransactionList';
+import CustomersList from './pages/CustomersList';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
            <Route path="/" element={<Home />} />
            <Route path="/signin" element={<SignIn />} />
            <Route path="/signup" element={<SignUp />} />
+           <Route path="/transactions" element={<TransactionsList/>} />
+           <Route path="/customers" element={<CustomersList/>}/>
         </Routes>
     </div>
   );

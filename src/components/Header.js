@@ -24,6 +24,13 @@ export default function Header() {
         navigate('/')
     }
 
+    const navigateToTransactionList = () => {
+      navigate('/transactions')
+    }
+
+    const navigateToCustomerList = () => {
+      navigate('/customers')
+    }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -35,8 +42,8 @@ export default function Header() {
           </Typography>
           <Box sx={{marginLeft : 'auto'}}>
           <Button color="inherit" >Make a Transaction</Button>
-          <Button color="inherit" >Transactions List</Button>
-          <Button color="inherit" >Customers List</Button>
+          <Button color="inherit" onClick={navigateToTransactionList} >Transactions List</Button>
+          <Button color="inherit" onClick={navigateToCustomerList} >Customers List</Button>
           <Button color="inherit" onClick={navigateToSignInPage}>Sign In</Button>
           <Button color="inherit" onClick={navigateToSignUpPage}>Sign Up</Button>
           </Box>
