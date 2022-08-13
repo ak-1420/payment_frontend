@@ -1,0 +1,641 @@
+{
+    "messages":
+    [
+{"id" : "CHQB"	, "message" : "beneficiary customer must be paid by cheque only."},
+{"id" : "CORT"	, "message" : "Payment is made in settlement for a trade."},
+{"id" : "HOLD"	, "message" : "Beneficiary customer or claimant will call upon identification."},
+{"id" : "INTC"	, "message" : "Payment between two companies that belongs to the same group."},
+{"id" : "PHOB"	, "message" : "Please advise the intermediary institution by phone."},
+{"id" : "PHOI"	, "message" : "Please advise the intermediary by phone."},
+{"id" : "PHON"	, "message" : "Please advise the account with institution by phone."},
+{"id" : "REPA"	, "message" : "Payments has a related e-Payments reference."},
+{"id" : "SDVA"	, "message" : "Payment must be executed with same day value to the"}
+    ],
+    "customers":[
+            {
+             "id": 83020817828620,
+             "name": "A KRISHNA MOHAN",
+             "clear_balance": 56000,
+             "transfer_type": "Customer Transfer",
+             "overdraft": "yes"
+            },
+            {
+             "id": 71319440983198,
+             "name": "A M MAYANNA",
+             "clear_balance": 224000,
+             "transfer_type": "Bank Transfer",
+             "overdraft": "No"
+            },
+            {
+             "id": 69652133523248,
+             "name": "HDFC BANK -(CHENNAI)",
+             "clear_balance": 223997,
+             "transfer_type": "Bank Transfer for Own Account",
+             "overdraft": "yes"
+            },
+            {
+             "id": 78195245302715,
+             "name": "A RAJESH KUMAR",
+             "clear_balance": 35000,
+             "overdraft": "yes"
+            },
+            {
+             "id": 47468155457802,
+             "name": "A S VIJAY KUMAR",
+             "clear_balance": 56000,
+             "overdraft": "No"
+            },
+            {
+             "id": 45766734966995,
+             "name": "ABHISHEK BIYANI",
+             "clear_balance": 224000,
+             "overdraft": "No"
+            },
+            {
+             "id": 87139550565094,
+             "name": "ABHITHA",
+             "clear_balance": 223997,
+             "overdraft": "No"
+            },
+            {
+             "id": 39145971759304,
+             "name": "ABRAHAM VARGHESE",
+             "clear_balance": 5200,
+             "overdraft": "No"
+            },
+            {
+             "id": 83411975607693,
+             "name": "ABY GEORGE",
+             "clear_balance": 15400,
+             "overdraft": "No"
+            },
+            {
+             "id": 45002608912874,
+             "name": "HDFC BANK -(MUMBAI)",
+             "clear_balance": 56001,
+             "overdraft": "No"
+            },
+            {
+             "id": 15510851190541,
+             "name": "AJAY SHAMU KUMAR",
+             "clear_balance": 224004,
+             "overdraft": "No"
+            },
+            {
+             "id": 64059555180495,
+             "name": "AKSHAYA WEALTH MANAGEMENT (P) LTD",
+             "clear_balance": 224001,
+             "overdraft": "No"
+            },
+            {
+             "id": 42895235807723,
+             "name": "HDFC BANK -(DELHI)",
+             "clear_balance": 1120005,
+             "overdraft": "No"
+            },
+            {
+             "id": 34835543999244,
+             "name": "ANAND L S",
+             "clear_balance": 56001,
+             "overdraft": "No"
+            },
+            {
+             "id": 76396804083946,
+             "name": "ANANTHAKUMAR",
+             "clear_balance": 224004,
+             "overdraft": "No"
+            },
+            {
+             "id": 14783038759432,
+             "name": "ANANTHAMURTHY SHAMASUNDARA",
+             "clear_balance": 100,
+             "overdraft": "YES"
+            },
+            {
+             "id": 87030077359017,
+             "name": "ANIL GUPTA",
+             "clear_balance": 25600,
+             "overdraft": "No"
+            },
+            {
+             "id": 37437137526069,
+             "name": "ANIL KUMAR",
+             "clear_balance": 35800,
+             "overdraft": "No"
+            },
+            {
+             "id": 69443662887399,
+             "name": "ANIL KUMAR NAGARAJ",
+             "clear_balance": 56001,
+             "overdraft": "yes"
+            },
+            {
+             "id": 27216037942722,
+             "name": "HDFC BANK -(GOA)",
+             "clear_balance": 224004,
+             "overdraft": "yes"
+            },
+            {
+             "id": 77236671175938,
+             "name": "ANIL V GORUR",
+             "clear_balance": 224001,
+             "overdraft": "yes"
+            },
+            {
+             "id": 79594243111085,
+             "name": "ANITA B MEHTA",
+             "clear_balance": -25000,
+             "overdraft": "yes"
+            },
+            {
+             "id": 46957845854316,
+             "name": "ANITHA B ASHWATH",
+             "clear_balance": 56001,
+             "overdraft": "yes"
+            },
+            {
+             "id": 61331727051606,
+             "name": "ANJAN KUMAR G",
+             "clear_balance": 224004,
+             "overdraft": "yes"
+            },
+            {
+             "id": 64754104823235,
+             "name": "ANKITA BANERJEE",
+             "clear_balance": 224001,
+             "overdraft": "No"
+            },
+            {
+             "id": 80505259371358,
+             "name": "ANNUKA NIRVAN",
+             "clear_balance": 76334,
+             "overdraft": "No"
+            },
+            {
+             "id": 63615912257030,
+             "name": "ANU",
+             "clear_balance": 76334,
+             "overdraft": "No"
+            },
+            {
+             "id": 13645221972859,
+             "name": "ANUPAMA N",
+             "clear_balance": 95000,
+             "overdraft": "No"
+            },
+            {
+             "id": 17308739433267,
+             "name": "AREEFIKBAL T F",
+             "clear_balance": 65000,
+             "overdraft": "No"
+            },
+            {
+             "id": 57577094248867,
+             "name": "ARJUN PARAMESWARA",
+             "clear_balance": 508250,
+             "overdraft": "No"
+            },
+            {
+             "id": 89479615455884,
+             "name": "ARPITHA M S",
+             "clear_balance": -350,
+             "overdraft": "No"
+            },
+            {
+             "id": 27225043545104,
+             "name": "ASADI LINGAREDDY",
+             "clear_balance": 1556002,
+             "overdraft": "No"
+            },
+            {
+             "id": 20050293665889,
+             "name": "ASHAJYOTHI M",
+             "clear_balance": 224008,
+             "overdraft": "No"
+            },
+            {
+             "id": 81181212472499,
+             "name": "ASHISH MISHRA",
+             "clear_balance": 224005,
+             "overdraft": "No"
+            },
+            {
+             "id": 71928505646815,
+             "name": "ASHOK H R",
+             "clear_balance": 46000,
+             "overdraft": "No"
+            },
+            {
+             "id": 49823469696097,
+             "name": "ASHOKA AR",
+             "clear_balance": 56200,
+             "overdraft": "YES"
+            },
+            {
+             "id": 98196009547795,
+             "name": "AVISHEK MUKHERJEE",
+             "clear_balance": 56002,
+             "overdraft": "NO"
+            },
+            {
+             "id": 79029264231605,
+             "name": "AYISHA KAUSAR",
+             "clear_balance": 224008,
+             "overdraft": "NO"
+            },
+            {
+             "id": 53853797183656,
+             "name": "B A SANTOSH",
+             "clear_balance": 224005,
+             "overdraft": "NO"
+            },
+            {
+             "id": 57792220815896,
+             "name": "B JAYARAM",
+             "clear_balance": 1120025,
+             "overdraft": "NO"
+            },
+            {
+             "id": 72153770404022,
+             "name": "B PRAKASH BABU",
+             "clear_balance": 0,
+             "overdraft": "YES"
+            }
+    ],
+    "currency":[
+     {"id" : "USD", "value": 74.21},
+     {"id" : "EUR", "value": 84},
+     {"id" : "GBP", "value": 102},
+     {"id" : "JPY", "value": 0.645}
+    ],
+    "receivers":[
+        {
+         "id": "ABBLINBBXXX",
+         "institution": "AB BANK LIMITED"
+        },
+        {
+         "id": "ACBLINBBXXX",
+         "institution": "ABHYUDAYA CO-OPERATIVE BANK LTD."
+        },
+        {
+         "id": "ABNAINBBAHM",
+         "institution": "ABN AMRO BANK N.V."
+        },
+        {
+         "id": "ADCBINBBXXX",
+         "institution": "ABU DHABI COMMERCIAL BANK"
+        },
+        {
+         "id": "ALLAINBBXXX",
+         "institution": "ALLAHABAD BANK"
+        },
+        {
+         "id": "ANDBINBBXXX",
+         "institution": "ANDHRA BANK"
+        },
+        {
+         "id": "ADIAINBBXXX",
+         "institution": "ANTWERP DIAMOND BANK N.V."
+        },
+        {
+         "id": "AXISINBBXXX",
+         "institution": "AXIS BANK LIMITED"
+        },
+        {
+         "id": "BOFAIN4XMAA",
+         "institution": "BANK OF AMERICA, N.A. CHENNAI"
+        },
+        {
+         "id": "BOFAIN4XCCU",
+         "institution": "BANK OF AMERICA, N.A. KOLKATA"
+        },
+        {
+         "id": "BBKUINBBXXX",
+         "institution": "BANK OF BAHRAIN AND KUWAIT B.S.C."
+        },
+        {
+         "id": "BARBINBBXXX",
+         "institution": "BANK OF BARODA"
+        },
+        {
+         "id": "BCEYIN5MXXX",
+         "institution": "BANK OF CEYLON"
+        },
+        {
+         "id": "BKIDINBBXXX",
+         "institution": "BANK OF INDIA"
+        },
+        {
+         "id": "MAHBINBBAHM",
+         "institution": "BANK OF MAHARASHTRA"
+        },
+        {
+         "id": "NOSCINBBBLR",
+         "institution": "BANK OF NOVA SCOTIA, THE"
+        },
+        {
+         "id": "BOTKIN5MXXX",
+         "institution": "BANK OF TOKYO-MITSUBISHI UFJ, LTD., THE"
+        },
+        {
+         "id": "BARCINBBMUM",
+         "institution": "BARCLAYS BANK PLC"
+        },
+        {
+         "id": "BNPAINBBAHM",
+         "institution": "BNP PARIBAS INDIA"
+        },
+        {
+         "id": "CNRBINBBXXX",
+         "institution": "CANARA BANK"
+        },
+        {
+         "id": "CSYBIN55XXX",
+         "institution": "CATHOLIC SYRIAN BANK LTD"
+        },
+        {
+         "id": "CBININBBLAL",
+         "institution": "CENTRAL BANK OF INDIA"
+        },
+        {
+         "id": "CTCBINDDXXX",
+         "institution": "CHINATRUST COMMERCIAL BANK"
+        },
+        {
+         "id": "CITIINBXBLR",
+         "institution": "CITIBANK N.A."
+        },
+        {
+         "id": "CIUBIN5MXXX",
+         "institution": "CITY UNION BANK LIMITED"
+        },
+        {
+         "id": "CCILINBBXXX",
+         "institution": "CLEARING CORPORATION OF INDIA LTD, THE"
+        },
+        {
+         "id": "CORPINBBXXX",
+         "institution": "CORPORATION BANK"
+        },
+        {
+         "id": "DBSSINBBIBD",
+         "institution": "DBS BANK LTD, MUMBAI BRANCH"
+        },
+        {
+         "id": "BKDNINBBXXX",
+         "institution": "DENA BANK"
+        },
+        {
+         "id": "DEUTINBBBGL",
+         "institution": "DEUTSCHE BANK AG"
+        },
+        {
+         "id": "DCBLINBB036",
+         "institution": "DEVELOPMENT CREDIT BANK LTD."
+        },
+        {
+         "id": "DLXBINBBKPM",
+         "institution": "DHANALAKSHMI BANK LTD, THE"
+        },
+        {
+         "id": "EIBIINBBXXX",
+         "institution": "EXPORT-IMPORT BANK OF INDIA"
+        },
+        {
+         "id": "FDRLINBBXXX",
+         "institution": "FEDERAL BANK LIMITED, THE"
+        },
+        {
+         "id": "FIRNINBBXXX",
+         "institution": "FIRSTRAND BANK LIMITED"
+        },
+        {
+         "id": "HDFCINBBAHM",
+         "institution": "HDFC BANK LIMITED"
+        },
+        {
+         "id": "HSBCINBBBGE",
+         "institution": "HONGKONG AND SHANGHAI BANKING CORPORATION LIMITED, THE"
+        },
+        {
+         "id": "ICICINBB024",
+         "institution": "ICICI BANK LIMITED"
+        },
+        {
+         "id": "IBKLINBBXXX",
+         "institution": "IDBI BANK LIMITED"
+        },
+        {
+         "id": "IDIBINBBXXX",
+         "institution": "INDIAN BANK"
+        },
+        {
+         "id": "IOBAINBBXXX",
+         "institution": "INDIAN OVERSEAS BANK"
+        },
+        {
+         "id": "INDBINBBXXX",
+         "institution": "INDUSIND BANK LIMITED"
+        },
+        {
+         "id": "VYSAINBBAHD",
+         "institution": "ING VYSYA BANK LTD."
+        },
+        {
+         "id": "JAKAINBBAGR",
+         "institution": "JAMMU AND KASHMIR BANK LTD"
+        },
+        {
+         "id": "CHASINBXTRO",
+         "institution": "JPMORGAN CHASE BANK, N.A."
+        },
+        {
+         "id": "VTBRINDDXXX",
+         "institution": "JSC VTB BANK, NEW DELHI BRANCH"
+        },
+        {
+         "id": "KARBINBBBNG",
+         "institution": "KARNATAKA BANK LTD."
+        },
+        {
+         "id": "KVBLINBBADI",
+         "institution": "KARUR VYSYA BANK LTD., THE"
+        },
+        {
+         "id": "KKBKINBBCPC",
+         "institution": "KOTAK MAHINDRA BANK LIMITED"
+        },
+        {
+         "id": "KRTHINBBXXX",
+         "institution": "KRUNG THAI BANK PUBLIC COMPANY LTD"
+        },
+        {
+         "id": "LAVBINBB114",
+         "institution": "LAKSHMI VILAS BANK LIMITED"
+        },
+        {
+         "id": "MSCIINBBXXX",
+         "institution": "MAHARASHTRA STATE CO-OPERATIVE BANK LTD., THE"
+        },
+        {
+         "id": "MSHQINBBXXX",
+         "institution": "MASHREQ BANK"
+        },
+        {
+         "id": "MHCBINBBXXX",
+         "institution": "MIZUHO CORPORATE BANK LTD"
+        },
+        {
+         "id": "MSMBINBXXXX",
+         "institution": "MORGAN STANLEY INDIA COMPANY PVT LTD"
+        },
+        {
+         "id": "OIBAINBBXXX",
+         "institution": "OMAN INTERNATIONAL BANK"
+        },
+        {
+         "id": "GTBKINBBXXX",
+         "institution": "ORIENTAL BANK OF COMMERCE"
+        },
+        {
+         "id": "PSIBINBB020",
+         "institution": "PUNJAB AND SIND BANK"
+        },
+        {
+         "id": "PUNBINBBXXX",
+         "institution": "PUNJAB NATIONAL BANK"
+        },
+        {
+         "id": "RBISINBBXXX",
+         "institution": "RESERVE BANK OF INDIA"
+        },
+        {
+         "id": "SRCBINBBAUR",
+         "institution": "SARASWAT CO-OPERATIVE BANK LTD., THE"
+        },
+        {
+         "id": "SBCLINBBXXX",
+         "institution": "SBI COMMERCIAL AND INTERNATIONAL BANK LTD."
+        },
+        {
+         "id": "SHBKINBBXXX",
+         "institution": "SHINHAN BANK"
+        },
+        {
+         "id": "SIDBINBBCBB",
+         "institution": "SMALL INDUSTRIES DEVELOPMENT BANK OF INDIA"
+        },
+        {
+         "id": "SOGEINBBBLR",
+         "institution": "SOCIETE GENERALE"
+        },
+        {
+         "id": "BSONINCCXXX",
+         "institution": "SONALI BANK"
+        },
+        {
+         "id": "SOININ55179",
+         "institution": "SOUTH INDIAN BANK LTD., THE"
+        },
+        {
+         "id": "SCDIIN51XXX",
+         "institution": "SPARK CAPITAL ADVISORS (INDIA) PRIVATE LTD"
+        },
+        {
+         "id": "SCBLINBBMDS",
+         "institution": "STANDARD CHARTERED BANK"
+        },
+        {
+         "id": "SBBJINBBXXX",
+         "institution": "STATE BANK OF BIKANER AND JAIPUR"
+        },
+        {
+         "id": "SBHYINBBXXX",
+         "institution": "STATE BANK OF HYDERABAD"
+        },
+        {
+         "id": "SBININBBXXX",
+         "institution": "STATE BANK OF INDIA"
+        },
+        {
+         "id": "STININBBXXX",
+         "institution": "STATE BANK OF INDORE"
+        },
+        {
+         "id": "STCBINBXNPT",
+         "institution": "STATE BANK OF MAURITIUS LIMITED"
+        },
+        {
+         "id": "SBMYINBBXXX",
+         "institution": "STATE BANK OF MYSORE"
+        },
+        {
+         "id": "STBPINBBXXX",
+         "institution": "STATE BANK OF PATIALA"
+        },
+        {
+         "id": "SBTRINBBXXX",
+         "institution": "STATE BANK OF TRAVANCORE"
+        },
+        {
+         "id": "SYNBINBBXXX",
+         "institution": "SYNDICATE BANK"
+        },
+        {
+         "id": "TMBLINBBCHE",
+         "institution": "TAMILNAD MERCANTILE BANK LIMITED"
+        },
+        {
+         "id": "BRAJINBBARA",
+         "institution": "THE BANK OF RAJASTHAN LTD."
+        },
+        {
+         "id": "BCMLINBBXXX",
+         "institution": "THE BHARAT CO-OPERATIVE BANK (MUMBAI) LTD"
+        },
+        {
+         "id": "COSDINBBXXX",
+         "institution": "THE COSMOS CO-OPERATIVE BANK LTD."
+        },
+        {
+         "id": "KALUINAAXXX",
+         "institution": "THE KALUPUR COMMERCIAL CO-OPERATIVE BANK LIMITED"
+        },
+        {
+         "id": "SVCBINBBBLR",
+         "institution": "THE SHAMRAO VITHAL CO-OPERATIVE BANK LIMITED"
+        },
+        {
+         "id": "TCILINBBXXX",
+         "institution": "THOMAS COOK (INDIA) LTD."
+        },
+        {
+         "id": "UBSWINBBXXX",
+         "institution": "UBS AG"
+        },
+        {
+         "id": "UCBAINBBXXX",
+         "institution": "UCO BANK"
+        },
+        {
+         "id": "UBININBBXXX",
+         "institution": "UNION BANK OF INDIA"
+        },
+        {
+         "id": "UTBIINBBECB",
+         "institution": "UNITED BANK OF INDIA"
+        },
+        {
+         "id": "VIJBINBBXXX",
+         "institution": "VIJAYA BANK"
+        },
+        {
+         "id": "YESBINBBDEL",
+         "institution": "YES BANK LIMITED"
+        }
+       ]
+}
+
+
+
+
