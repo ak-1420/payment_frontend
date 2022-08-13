@@ -31,6 +31,10 @@ export default function Header() {
     const navigateToCustomerList = () => {
       navigate('/customers')
     }
+
+    const navigateToMakeTransaction = () => {
+      navigate('/make-transaction')
+    }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -41,7 +45,7 @@ export default function Header() {
              Payment
           </Typography>
           <Box sx={{marginLeft : 'auto'}}>
-          <Button color="inherit" >Make a Transaction</Button>
+          <Button color="inherit" onClick={navigateToMakeTransaction}>Make a Transaction</Button>
           <Button color="inherit" onClick={navigateToTransactionList} >Transactions List</Button>
           <Button color="inherit" onClick={navigateToCustomerList} >Customers List</Button>
           <Button color="inherit" onClick={navigateToSignInPage}>Sign In</Button>

@@ -6,6 +6,7 @@ import SignIn from './pages/SignIn';
 import Header from './components/Header';
 import TransactionsList from './pages/TransactionList';
 import CustomersList from './pages/CustomersList';
+import TransactionForm from './pages/TransactionForm';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
            <Route path="/signup" element={<SignUp />} />
            <Route path="/transactions" element={<TransactionsList/>} />
            <Route path="/customers" element={<CustomersList/>}/>
+           <Route path="/make-transaction" element={<TransactionForm />} />
         </Routes>
     </div>
   );
