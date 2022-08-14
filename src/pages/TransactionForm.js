@@ -6,6 +6,7 @@ import { Button, FormControl, InputLabel, MenuItem, Select , Alert} from '@mui/m
 import axios from 'axios';
 
 
+
 export default function TransactionForm() {
 
   const [bookingDate , setBookingDate] = React.useState(null)
@@ -13,6 +14,17 @@ export default function TransactionForm() {
   const [customers , setCustomers] = React.useState([])
 
   const [receivers , setReceivers] = React.useState([])
+
+  const [messages , setMessages] = React.useState([])
+
+  React.useEffect(() => {
+    axios.get(`http://localhost:5000/messages`).then((res) => {
+      setMessages(res.data)
+      console.log('message codes data :',res.data)
+    }).catch((err) => {
+      console.log('unable to fetch message codes')
+    })
+  },[])
 
 
   React.useEffect(() => {
@@ -47,6 +59,13 @@ export default function TransactionForm() {
     account_holder_number : ""
   })
 
+  const [transferType , setTransferType] = React.useState("")
+
+  const handleTransferType = (e) => {
+    setTransferType(e.target.value)
+  }
+
+  
   const [transaction , setTransaction] = React.useState({
     transfer_type : "",
     message_code : "",
@@ -55,8 +74,51 @@ export default function TransactionForm() {
     currency : ""
   })
 
-  const [message , setMessage] = React.useState({})
-  const [amount , setAmount] = React.useState(null)
+  const [message , setMessage] = React.useState({
+    id:"",
+    msg: ""
+  })
+
+  const handleMessageCodeChange = (e) => {
+    const {value} = e.target
+    const data = messages?.find((m) => m.id === value)
+    setMessage({
+      id: data?.id,
+      msg : data?.message
+    })
+  }
+
+  const [amount , setAmount] = React.useState(0)
+  const [transferFees , setTransferFees] = React.useState(0)
+  const [clearBalance , setClearBalance] = React.useState(0)
+
+  React.useEffect(() => {
+    const fee = 0.25 * parseFloat(amount)
+    const totalFee = amount + fee
+    setTransferFees(fee)
+    setClearBalance(parseFloat(sender?.clear_balance) - totalFee)
+
+    if(totalFee > parseFloat(sender?.clear_balance) && sender?.overdraft?.toUpperCase() == "NO"){
+      // set an error
+      setError({
+        isError: true ,
+        message: "Insufficient funds to make a transaction"
+      })
+    }
+    else
+    {
+      setError({
+        isError: false ,
+        message: ""
+      })
+    }
+  },[amount])
+
+  const handleAmountChange = (e) => {
+    const {value} = e.target
+    setAmount(parseFloat(value))
+  }
+
   const [error , setError] = React.useState({
     isError : null ,
     message : ""
@@ -133,6 +195,16 @@ export default function TransactionForm() {
     }
   },[receiver.bic])
 
+
+  React.useEffect(() => {
+       // check the name is in sdn list
+       fetch('./../../sdnlist.txt')
+    .then((r) => r.text())
+    .then(text  => {
+      console.log(text);
+    })  
+  },[receiver?.account_holder_name])
+
   const handleReceiverAcNameChange = (e) => {
         const {value} = e.target
         setReceiver((prev) => ({
@@ -156,10 +228,6 @@ export default function TransactionForm() {
       bic : value
     }))
   }
-
-  console.log(error , 'error data')
-  
-  console.log(receiver , 'receiver data')
 
   return (
       <div style={{padding: '20px'}}>
@@ -281,12 +349,12 @@ export default function TransactionForm() {
         <Select
           labelId="transfer-type"
           id="select-transfer-type"
-          value={""}
+          value={transferType}
           label="Transfer type"
-          onChange={() => {}}
+          onChange={handleTransferType}
         >
-          <MenuItem value={"Bank"}>Bank Transfer</MenuItem>
-          <MenuItem value={"Customer"}>Customer Transfer</MenuItem>
+          <MenuItem value={"BANK"}>Bank Transfer</MenuItem>
+          <MenuItem value={"CUSTOMER"}>Customer Transfer</MenuItem>
           
         </Select>
       </FormControl>
@@ -299,19 +367,15 @@ export default function TransactionForm() {
         <Select
           labelId="message-code"
           id="select-message-code"
-          value={""}
+          value={message.id}
           label="Message code"
-          onChange={() => {}}
+          onChange={handleMessageCodeChange}
         >
-          <MenuItem value={"beneficiary customer must be paid by cheque only."}>CHQB</MenuItem>
-          <MenuItem value={"Payment is made in settlement for a trade."}>CORT</MenuItem>
-          <MenuItem value={"Beneficiary customer or claimant will call upon identification."}>HOLD</MenuItem>
-          <MenuItem value={"Payment between two companies that belongs to the same group."}>INTC</MenuItem>
-          <MenuItem value={"Please advise the intermediary institution by phone."}>PHOB</MenuItem>
-          <MenuItem value={"Please advise the intermediary by phone."}>PHOI</MenuItem>
-          <MenuItem value={"Please advise the account with institution by phone."}>PHON</MenuItem>
-          <MenuItem value={"Payments has a related e-Payments reference."}>REPA</MenuItem>
-          <MenuItem value={"Payment must be executed with same day value to the"}>SDVA</MenuItem>
+          {
+            messages.length > 0 && messages.map((m) => {
+              return <MenuItem key ={m.id} value={m.id}>{m.id}</MenuItem>
+            })
+          }
           
         </Select>
       </FormControl>
@@ -321,6 +385,8 @@ export default function TransactionForm() {
       <TextField
           id="input-transaction-amount"
           label="Amount"
+          value={amount}
+          onChange={handleAmountChange}
           type="number"
         />   
 
@@ -328,6 +394,7 @@ export default function TransactionForm() {
       <TextField
           id="input-transfer-fees"
           label="Transfer fees"
+          value={transferFees}
           type="number"
           inputProps={{
             readOnly : true
@@ -338,6 +405,7 @@ export default function TransactionForm() {
       <TextField
           id="input-clear-balance-txn"
           label="Clear balance"
+          value={clearBalance}
           type="number"
           inputProps={{
             readOnly:true
