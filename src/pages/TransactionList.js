@@ -6,17 +6,41 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+import axios from 'axios';
+
+const formatDate = (date) => {
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+  if (month.length < 2) 
+      month = '0' + month;
+  if (day.length < 2) 
+      day = '0' + day;
+
+  return [day, month, year].join('-');
 }
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+
+
 export default function TransactionsList() {
+
+  const [rows , setRows] = React.useState([])
+
+  React.useEffect(() => {
+      getTransactions()
+  },[])
+
+
+  const getTransactions = () => {
+    axios.get(`http://localhost:5000/transactions`)
+    .then((res) => {
+      setRows(res.data)
+    }).catch((err) => {
+      console.log('unable to fetch transactions list')
+    })
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -25,8 +49,13 @@ export default function TransactionsList() {
             <TableCell>Transaction Id</TableCell>
             <TableCell align="right">Transaction Type</TableCell>
             <TableCell align="right">Customer Id</TableCell>
-            <TableCell align="right">Reciver Id</TableCell>
-            <TableCell align="right">Status</TableCell>
+            <TableCell align="right">Receiver BIC</TableCell>
+            <TableCell align="right">Receiver Account Name</TableCell>
+            <TableCell align="right">Receiver Account Number</TableCell>
+            <TableCell align="right">Message Code</TableCell>
+            <TableCell align="right">Transfer Amount</TableCell>
+            <TableCell align="right">Transfer Fees</TableCell>
+            <TableCell align="right">Transaction Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -36,12 +65,17 @@ export default function TransactionsList() {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.id}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.transfer_type_code}</TableCell>
+              <TableCell align="right">{row.customer_id}</TableCell>
+              <TableCell align="right">{row.receiver_bic}</TableCell>
+              <TableCell align="right">{row.receiver_account_holder_name}</TableCell>
+              <TableCell align="right">{row.receiver_account_holder_number}</TableCell>
+              <TableCell align="right">{row.message_code}</TableCell>
+              <TableCell align="right">{row.inr_amount}</TableCell>
+              <TableCell align="right">{row.transfer_fees}</TableCell>
+              <TableCell align="right">{formatDate(row.transfer_date)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -229,6 +229,126 @@ export default function TransactionForm() {
     }))
   }
 
+  const isValid = () => {
+    if(sender?.customer_id == ""){
+      setError({isError: true , message : " customer id is required"})
+      return false;
+    }
+
+    if(sender?.overdraft == "" || sender?.account_holder_name == ""){
+      setError({isError: true , message : "valid customer id required"})
+      return false;
+    }
+
+    if(receiver?.bic == "" || receiver?.institution == "" ){
+      setError({isError: true , message: "valid receiver bic is required"})
+      return false;
+    }
+
+    if(receiver?.account_holder_name == ""){
+      setError({isError : true , message : "account holder name is required"})
+      return false;
+    }
+
+    if(receiver?.account_holder_number == ""){
+      setError({isError: true , message: "account holder number is required"})
+      return false;
+    }
+
+    if(bookingDate == null || bookingDate == ""){
+      setError({isError: true , message: "booking date is required"})
+      return false;
+    }
+
+    if(transferType == ""){
+      setError({isError: true , message : "transfer type is required"})
+      return
+    }
+
+    if(message.id == "" || message.msg == ""){
+      setError({isError: true , message : "message code is required"})
+      return false;
+    } 
+
+    if(amount == 0){
+      setError({isError: true , message: "amount is required"})
+      return false;
+    }
+
+    if(transferFees == 0){
+      setError({isError : true , message : "transfer fees must be > 0"})
+      return false;
+    }
+   
+    if(clearBalance < 0 && sender?.overdraft?.toUpperCase() == "NO"){
+      setError({isError: true , message : "transaction rejected due to insufficent funds"})
+      return false;
+    }
+
+    return true;
+
+  }
+
+  const cleanTransactionState = () => {
+    setSender({
+      customer_id : "",
+      account_holder_name : "",
+      clear_balance : 0,
+      overdraft : ""
+    })
+    setReceiver({
+      bic : "",
+      institution : "",
+      account_holder_name : "",
+      account_holder_number : ""
+    })
+   setTransferType("")
+   setTransferFees(0)
+   setAmount(0)
+   setClearBalance(0)
+   setMessage({id : "" , msg : ""})
+   setBookingDate(null)
+  }
+
+  const makeTransaction = () => {
+    if(!isValid()){
+      return
+    }
+
+    const payload = {
+      id: new Date().getTime() + sender?.customer_id,
+      customer_id : sender?.customer_id,
+      receiver_bic : receiver?.bic,
+      receiver_account_holder_name : receiver?.account_holder_name,
+      receiver_account_holder_number : receiver?.account_holder_number,
+      transfer_type_code : transferType,
+      message_code : message?.id,
+      transfer_fees : transferFees ,
+      inr_amount : amount ,
+      transfer_date : bookingDate,
+      // sender_bic : "sender_bic",
+      // currency_amount : "amount",
+      // currency_code : "code"
+    }
+
+    axios.post(`http://localhost:5000/transactions`,payload)
+    .then((res) => {
+      console.log(res.data)
+      axios.patch(`http://localhost:5000/customers/${sender?.customer_id}`,{
+        clear_balance : clearBalance
+      }).then((r) => {
+        console.log('sender clear balance also updated')
+        cleanTransactionState()
+        alert('transaction completed successfully!')
+      }).catch((e) => {
+        console.log('sender clear balance is not updated')
+      })
+    }).catch((err)=>{
+      console.log(err)
+      alert('transaction failed!')
+    })
+  }
+
   return (
       <div style={{padding: '20px'}}>
     <Box
@@ -415,7 +535,7 @@ export default function TransactionForm() {
 
        </div>
            
-       <Button variant="contained" sx={{m:2}}>Proceed </Button>
+       <Button onClick={makeTransaction} variant="contained" sx={{m:2}}>Proceed </Button>
   
       </div>
     </Box>
