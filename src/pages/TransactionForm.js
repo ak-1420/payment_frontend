@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import DateInput from '../components/DateInput';
-import { Button, FormControl, InputLabel, MenuItem, Select , Alert} from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select , Alert, Grid, Divider} from '@mui/material';
 import axios from 'axios';
 
 
@@ -142,10 +142,13 @@ export default function TransactionForm() {
     }
     else
     {
+
+      if(sender.customer_id != ""){
       setError({
         isError: true ,
-        message : "Customer Not Found"
+        message : "Customer Account Not Found"
       })
+    }
       setSender((prev) => ({
         ...prev,
         account_holder_name: "",
@@ -184,26 +187,18 @@ export default function TransactionForm() {
       })
     }
     else{
+      if(receiver.bic != ""){
       setError({
         isError: true,
-        message: "Account Not Found"
+        message: "Receiver Account Not Found"
       })
+    }
       setReceiver((prev) => ({
         ...prev,
         institution : ""
       }))
     }
   },[receiver.bic])
-
-
-  React.useEffect(() => {
-       // check the name is in sdn list
-       fetch('./../../sdnlist.txt')
-    .then((r) => r.text())
-    .then(text  => {
-      console.log(text);
-    })  
-  },[receiver?.account_holder_name])
 
   const handleReceiverAcNameChange = (e) => {
         const {value} = e.target
@@ -310,11 +305,14 @@ export default function TransactionForm() {
    setBookingDate(null)
   }
 
-  const makeTransaction = () => {
-    if(!isValid()){
-      return
-    }
+  const checkPayload = (p) => {
+    return (p.customer_id && p.receiver_bic && p.receiver_account_holder_name
+          && p.receiver_account_holder_number && p.transfer_type_code && p.message_code
+          && p.transfer_fees && p.inr_amount && p.transfer_date)
+  }
 
+  const makeTransaction = () => {
+   
     const payload = {
       id: new Date().getTime() + sender?.customer_id,
       customer_id : sender?.customer_id,
@@ -326,11 +324,23 @@ export default function TransactionForm() {
       transfer_fees : transferFees ,
       inr_amount : amount ,
       transfer_date : bookingDate,
+      status: (isValid()) ? true : false,
       // sender_bic : "sender_bic",
       // currency_amount : "amount",
       // currency_code : "code"
     }
 
+    if(!isValid() && checkPayload(payload)){
+      console.log('inside invalid condition')
+      axios.post(`http://localhost:5000/transactions`,payload)
+      .then((res) => {
+        console.log('failed transaction saved in the database')
+      }).catch((err) => console.log('unable to save the failed transaction details'))
+      return
+    }
+     
+    if(isValid()){
+       console.log('inside else condition')
     axios.post(`http://localhost:5000/transactions`,payload)
     .then((res) => {
       console.log(res.data)
@@ -347,6 +357,7 @@ export default function TransactionForm() {
       console.log(err)
       alert('transaction failed!')
     })
+    }
   }
 
   return (
@@ -359,15 +370,23 @@ export default function TransactionForm() {
       noValidate
       autoComplete="off"
     >
-      <div>
-        {/* Booking Date Input  */}
-       <DateInput label="Booking Date" defaultDate={bookingDate} setDate={setBookingDate} />
+      <Grid container spacing={2}>
+        
+        <Grid item xs={12}>
+        {(error?.isError && error?.message != "") && <Alert severity="error">{error?.message}</Alert>}
+        </Grid>
+     
 
+        <Grid item xs ={12}sx={{mr : "auto"}} >
+         <h4 style={{textAlign:'left'}}>Sender Details</h4>
+         </Grid>
 
         {/* sender details */}
-       <div>
-         <h4>Sender Details</h4>
-         {(error?.isError && error?.message != "") && <Alert severity="error">{error?.message}</Alert>}
+       <Grid container item xs={12}>
+         
+         
+
+         <Grid item xs={12} md={3} >
          {/* input customer Id */}
          <TextField
           id="input-customer-id"
@@ -376,7 +395,9 @@ export default function TransactionForm() {
           value={sender?.customer_id ?? ""}
           onChange={handleCustomerIdChange}
         />
-
+        </Grid>
+ 
+        <Grid item xs={12} md={3} >
         {/* input customer accound holder name */}
           <TextField
           id="input-account-holder-name"
@@ -387,7 +408,9 @@ export default function TransactionForm() {
             readOnly:true
           }}
         />
+        </Grid>
 
+        <Grid item xs={12} md={3} >
         {/* input customer clear balance */}
         <TextField
           id="input-clear-balance"
@@ -398,7 +421,9 @@ export default function TransactionForm() {
             readOnly:true
           }}
         />
+        </Grid>
 
+        <Grid item xs={12} md={3} >
          <TextField
           id="input-currency"
           label="Overdraft"
@@ -408,15 +433,22 @@ export default function TransactionForm() {
             readOnly:true
           }}
         />     
+        </Grid>
 
-       </div>
+       </Grid>
 
 
 
        {/* receiver details */}
-       <div>
-         <h4>Receiver Details</h4>
+       <Grid container item xs={12}>
 
+         <Grid item xs={12}>
+         <h4 style={{textAlign:'left'}}>Receiver Details</h4>
+         </Grid>
+        
+
+          <Grid container item xs={12}>
+         <Grid item xs={12} md={3}>
          {/* input bic*/}
          <TextField
           id="input-bic"
@@ -425,7 +457,9 @@ export default function TransactionForm() {
           value={receiver?.bic}
           onChange={handleBicChange}
         />
+        </Grid>
 
+        <Grid item xs={12} md={3}>
         {/* input institution name*/}
           <TextField
           id="input-institution-name"
@@ -436,7 +470,9 @@ export default function TransactionForm() {
             readOnly:true
           }}
         />
+        </Grid>
 
+        <Grid item xs={12} md={3}>
         {/* input Account Holder Name */}
         <TextField
           id="input-receiver-ac-name"
@@ -445,7 +481,9 @@ export default function TransactionForm() {
           value={receiver?.account_holder_name}
           onChange={handleReceiverAcNameChange}
         />
+        </Grid>
 
+        <Grid item xs={12} md={3}>
          {/* input receiver account holder number */}
          <TextField
           id="input-account-holder-number-receiver"
@@ -454,17 +492,24 @@ export default function TransactionForm() {
           value={receiver?.account_holder_number}
           onChange={handleReceiverAcNoChange}
         />     
+        </Grid>
+        </Grid>
 
-       </div>
+       </Grid>
 
         
         {/* Transaction Details */}
         
-        <div>
-         <h4>Transaction Details</h4>
+        <Grid item container xs={12}>
+          <Grid item xs={12}>
+          <h4 style={{textAlign:'left'}}>Transaction Details</h4>
+          </Grid>
 
-        {/* input transfer type */}
-        <FormControl fullWidth sx={{m : 2}}>
+          <Grid container item xs={12} spacing={1}>
+
+             <Grid item xs={12} md={4}>
+                 {/* input transfer type */}
+        <FormControl fullWidth >
         <InputLabel id="transfer-type">Transfer type</InputLabel>
         <Select
           labelId="transfer-type"
@@ -478,11 +523,39 @@ export default function TransactionForm() {
           
         </Select>
       </FormControl>
+             </Grid>
+
+             <Grid item xs={12} md={4}>
+                   {/* input amount */}
+      <TextField
+          id="input-transaction-amount"
+          label="Amount"
+          value={amount}
+          onChange={handleAmountChange}
+          type="number"
+        />  
+                </Grid>
 
 
-      {/* input message code */}
+                <Grid item xs={12} md={4}>
+                   {/* input transfer fees */}
+      <TextField
+          id="input-transfer-fees"
+          label="Transfer fees"
+          value={transferFees}
+          type="number"
+          inputProps={{
+            readOnly : true
+          }}
+        />  
+                </Grid>
 
-      <FormControl fullWidth sx={{m: 2}} >
+
+               
+             <Grid item xs={12} md={4}>
+                  {/* input message code */}
+
+      <FormControl fullWidth  >
         <InputLabel id="message-code">Message code</InputLabel>
         <Select
           labelId="message-code"
@@ -499,29 +572,10 @@ export default function TransactionForm() {
           
         </Select>
       </FormControl>
+             </Grid>
 
-
-      {/* input amount */}
-      <TextField
-          id="input-transaction-amount"
-          label="Amount"
-          value={amount}
-          onChange={handleAmountChange}
-          type="number"
-        />   
-
-      {/* input transfer fees */}
-      <TextField
-          id="input-transfer-fees"
-          label="Transfer fees"
-          value={transferFees}
-          type="number"
-          inputProps={{
-            readOnly : true
-          }}
-        />  
-
-      {/* input clear balance */}
+             <Grid item xs={12} md={4}>
+                       {/* input clear balance */}
       <TextField
           id="input-clear-balance-txn"
           label="Clear balance"
@@ -531,13 +585,24 @@ export default function TransactionForm() {
             readOnly:true
           }}
         />  
-  
+                </Grid>
 
-       </div>
-           
+                <Grid item xs={12} md={4}>
+                <DateInput label="Booking Date" defaultDate={bookingDate} setDate={setBookingDate} />
+                </Grid>
+         
+          </Grid>
+         
+
+            
+
+       </Grid>
+
+       <Grid item xs={12}>
        <Button onClick={makeTransaction} variant="contained" sx={{m:2}}>Proceed </Button>
-  
-      </div>
+       </Grid>
+
+      </Grid>
     </Box>
     </div>
   );

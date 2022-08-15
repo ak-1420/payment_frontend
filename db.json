@@ -41,7 +41,7 @@
     {
       "id": 83020817828620,
       "name": "A KRISHNA MOHAN",
-      "clear_balance": 2125,
+      "clear_balance": -11625,
       "transfer_type": "Customer Transfer",
       "overdraft": "yes"
     },
@@ -683,7 +683,8 @@
       "message_code": "PHON",
       "transfer_fees": 250,
       "inr_amount": 1000,
-      "transfer_date": "2022-08-15T00:00:00.000Z"
+      "transfer_date": "2022-08-15T00:00:00.000Z",
+      "status": true
     },
     {
       "id": 84681300508761,
@@ -695,7 +696,8 @@
       "message_code": "PHOI",
       "transfer_fees": 10000,
       "inr_amount": 40000,
-      "transfer_date": "2022-08-15T00:00:00.000Z"
+      "transfer_date": "2022-08-15T00:00:00.000Z",
+      "status": true
     },
     {
       "id": 84681305496158,
@@ -707,7 +709,60 @@
       "message_code": "REPA",
       "transfer_fees": 525,
       "inr_amount": 2100,
-      "transfer_date": "2022-08-16T00:00:00.000Z"
+      "transfer_date": "2022-08-16T00:00:00.000Z",
+      "status": true
+    },
+    {
+      "id": 84681361006029,
+      "customer_id": 83020817828620,
+      "receiver_bic": "ADCBINBBXXX",
+      "receiver_account_holder_name": "Akhil",
+      "receiver_account_holder_number": "234346474",
+      "transfer_type_code": "CUSTOMER",
+      "message_code": "PHOB",
+      "transfer_fees": 2500,
+      "inr_amount": 10000,
+      "transfer_date": "2022-08-16T00:00:00.000Z",
+      "status": true
+    },
+    {
+      "id": 72979984503424,
+      "customer_id": 71319440983198,
+      "receiver_bic": "ADCBINBBXXX",
+      "receiver_account_holder_name": "Ali Kahn",
+      "receiver_account_holder_number": "234234534",
+      "transfer_type_code": "CUSTOMER",
+      "message_code": "PHOB",
+      "transfer_fees": 58558,
+      "inr_amount": 234232,
+      "transfer_date": "2022-08-15T00:00:00.000Z",
+      "status": false
+    },
+    {
+      "id": 72979993230955,
+      "customer_id": 71319440983198,
+      "receiver_bic": "ACBLINBBXXX",
+      "receiver_account_holder_name": "Sai Kiran",
+      "receiver_account_holder_number": "5647564356",
+      "transfer_type_code": "CUSTOMER",
+      "message_code": "PHON",
+      "transfer_fees": 125000,
+      "inr_amount": 500000,
+      "transfer_date": "2022-08-15T00:00:00.000Z",
+      "status": false
+    },
+    {
+      "id": 84681370207340,
+      "customer_id": 83020817828620,
+      "receiver_bic": "ACBLINBBXXX",
+      "receiver_account_holder_name": "Jamshuddhin",
+      "receiver_account_holder_number": "3452345243",
+      "transfer_type_code": "CUSTOMER",
+      "message_code": "REPA",
+      "transfer_fees": 250,
+      "inr_amount": 1000,
+      "transfer_date": "2022-08-15T00:00:00.000Z",
+      "status": true
     }
   ]
 }

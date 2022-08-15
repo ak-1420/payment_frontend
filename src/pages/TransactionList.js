@@ -56,12 +56,13 @@ export default function TransactionsList() {
             <TableCell align="right">Transfer Amount</TableCell>
             <TableCell align="right">Transfer Fees</TableCell>
             <TableCell align="right">Transaction Date</TableCell>
+            <TableCell align="right">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -76,6 +77,7 @@ export default function TransactionsList() {
               <TableCell align="right">{row.inr_amount}</TableCell>
               <TableCell align="right">{row.transfer_fees}</TableCell>
               <TableCell align="right">{formatDate(row.transfer_date)}</TableCell>
+              <TableCell align="right">{row.status ? "SUCCESS" : "FAILED"}</TableCell>
             </TableRow>
           ))}
         </TableBody>
