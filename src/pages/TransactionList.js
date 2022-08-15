@@ -33,7 +33,7 @@ export default function TransactionsList() {
 
 
   const getTransactions = () => {
-    axios.get(`http://localhost:5000/transactions`)
+    axios.get(`http://localhost:5000/api/v1/transaction/all`)
     .then((res) => {
       setRows(res.data)
     }).catch((err) => {
@@ -62,21 +62,21 @@ export default function TransactionsList() {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.id}
+              key={row.transactionId}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.id}
+                {row.transactionId}
               </TableCell>
-              <TableCell align="right">{row.transfer_type_code}</TableCell>
-              <TableCell align="right">{row.customer_id}</TableCell>
-              <TableCell align="right">{row.receiver_bic}</TableCell>
-              <TableCell align="right">{row.receiver_account_holder_name}</TableCell>
-              <TableCell align="right">{row.receiver_account_holder_number}</TableCell>
-              <TableCell align="right">{row.message_code}</TableCell>
-              <TableCell align="right">{row.inr_amount}</TableCell>
-              <TableCell align="right">{row.transfer_fees}</TableCell>
-              <TableCell align="right">{formatDate(row.transfer_date)}</TableCell>
+              <TableCell align="right">{row.transferTypeCode}</TableCell>
+              <TableCell align="right">{row.customerId}</TableCell>
+              <TableCell align="right">{row.receiverBIC}</TableCell>
+              <TableCell align="right">{row.receiverAccountHolderName}</TableCell>
+              <TableCell align="right">{row.receiverAccountHolderNumber}</TableCell>
+              <TableCell align="right">{row.messageCode}</TableCell>
+              <TableCell align="right">{row.inrAmount}</TableCell>
+              <TableCell align="right">{row.transferFees}</TableCell>
+              <TableCell align="right">{formatDate(row.transferDate)}</TableCell>
               <TableCell align="right">{row.status ? "SUCCESS" : "FAILED"}</TableCell>
             </TableRow>
           ))}

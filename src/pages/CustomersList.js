@@ -19,7 +19,7 @@ export default function CustomersList() {
   },[])
 
   const getCustomers = () => {
-    axios.get(`http://localhost:5000/customers`)
+    axios.get(`http://localhost:5000/api/v1/customer/all`)
     .then((res) => {
       setRows(res.data)
     }).catch((err) => {
@@ -42,16 +42,16 @@ export default function CustomersList() {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.id}
+              key={row.customerId}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.id}
+                {row.customerId}
               </TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.clear_balance}</TableCell>
-              <TableCell align="right">{row.transfer_type}</TableCell>
-              <TableCell align="right">{row.overdraft}</TableCell>
+              <TableCell align="right">{row.accountHolderName}</TableCell>
+              <TableCell align="right">{row.clearBalance}</TableCell>
+              <TableCell align="right">{row.transferType}</TableCell>
+              <TableCell align="right">{row.overDraftFlag ? "YES" : "NO"}</TableCell>
             </TableRow>
           ))}
         </TableBody>

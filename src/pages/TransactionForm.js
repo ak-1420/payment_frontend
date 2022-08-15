@@ -18,7 +18,7 @@ export default function TransactionForm() {
   const [messages , setMessages] = React.useState([])
 
   React.useEffect(() => {
-    axios.get(`http://localhost:5000/messages`).then((res) => {
+    axios.get(`http://localhost:5000/api/v1/message/all`).then((res) => {
       setMessages(res.data)
       console.log('message codes data :',res.data)
     }).catch((err) => {
@@ -28,7 +28,7 @@ export default function TransactionForm() {
 
 
   React.useEffect(() => {
-    axios.get(`http://localhost:5000/receivers`).then((res) => {
+    axios.get(`http://localhost:5000/api/v1/bank/all`).then((res) => {
       setReceivers(res.data)
       console.log(res.data , 'receivers data')
     }).catch((err) => {
@@ -37,7 +37,7 @@ export default function TransactionForm() {
   },[])
 
   React.useEffect(() => {
-    axios.get(`http://localhost:5000/customers`).then((res) => {
+    axios.get(`http://localhost:5000/api/v1/customer/all`).then((res) => {
       setCustomers(res.data)
       console.log(res.data , 'customers data')
     }).catch((err) => {
@@ -65,14 +65,6 @@ export default function TransactionForm() {
     setTransferType(e.target.value)
   }
 
-  
-  const [transaction , setTransaction] = React.useState({
-    transfer_type : "",
-    message_code : "",
-    amount : "",
-    transfer_fees : "",
-    currency : ""
-  })
 
   const [message , setMessage] = React.useState({
     id:"",
@@ -81,10 +73,10 @@ export default function TransactionForm() {
 
   const handleMessageCodeChange = (e) => {
     const {value} = e.target
-    const data = messages?.find((m) => m.id === value)
+    const data = messages?.find((m) => m.messageCode === value)
     setMessage({
-      id: data?.id,
-      msg : data?.message
+      id: data?.messageCode,
+      msg : data?.instruction
     })
   }
 
@@ -126,14 +118,14 @@ export default function TransactionForm() {
 
   React.useEffect(() => {
     // get customer record with the given 
-    const record = customers?.find((c) => c.id == sender?.customer_id)
+    const record = customers?.find((c) => c.customerId == sender?.customer_id)
     
     if(record){
        setSender((prev) => ({
-         customer_id : record.id,
-         account_holder_name: record.name,
-         clear_balance : record.clear_balance,
-         overdraft : record.overdraft
+         customer_id : record.customerId,
+         account_holder_name: record.accountHolderName,
+         clear_balance : record.clearBalance,
+         overdraft : record.overDraftFlag ? "YES" : "NO"
        }))
        setError({
         isError: false ,
@@ -173,12 +165,12 @@ export default function TransactionForm() {
 
   React.useEffect(() => {
     // get receiver record with the given bic
-    const record = receivers?.find((r) => r.id == receiver?.bic)
+    const record = receivers?.find((r) => r.bic == receiver?.bic)
     if(record){
 
       setReceiver((prev) => ({
         ...prev,
-        institution : record.institution
+        institution : record.bankName
       }))
 
       setError({
@@ -306,33 +298,30 @@ export default function TransactionForm() {
   }
 
   const checkPayload = (p) => {
-    return (p.customer_id && p.receiver_bic && p.receiver_account_holder_name
-          && p.receiver_account_holder_number && p.transfer_type_code && p.message_code
-          && p.transfer_fees && p.inr_amount && p.transfer_date)
+    return (p.customerId && p.receiverBIC && p.receiverAccountHolderName
+          && p.receiverAccountHolderNumber && p.transferTypeCode && p.messageCode
+          && p.transferFees && p.inrAmount && p.transferDate)
   }
 
   const makeTransaction = () => {
    
     const payload = {
-      id: new Date().getTime() + sender?.customer_id,
-      customer_id : sender?.customer_id,
-      receiver_bic : receiver?.bic,
-      receiver_account_holder_name : receiver?.account_holder_name,
-      receiver_account_holder_number : receiver?.account_holder_number,
-      transfer_type_code : transferType,
-      message_code : message?.id,
-      transfer_fees : transferFees ,
-      inr_amount : amount ,
-      transfer_date : bookingDate,
+      customerId : sender?.customer_id,
+      receiverBIC : receiver?.bic,
+      receiverAccountHolderName : receiver?.account_holder_name,
+      receiverAccountHolderNumber : receiver?.account_holder_number,
+      transferTypeCode : transferType,
+      messageCode : message?.id,
+      transferFees : transferFees ,
+      inrAmount : amount ,
+      transferDate : bookingDate,
       status: (isValid()) ? true : false,
-      // sender_bic : "sender_bic",
-      // currency_amount : "amount",
-      // currency_code : "code"
+    
     }
 
     if(!isValid() && checkPayload(payload)){
       console.log('inside invalid condition')
-      axios.post(`http://localhost:5000/transactions`,payload)
+      axios.post(`http://localhost:5000/api/v1/transaction/add`,payload)
       .then((res) => {
         console.log('failed transaction saved in the database')
       }).catch((err) => console.log('unable to save the failed transaction details'))
@@ -341,11 +330,15 @@ export default function TransactionForm() {
      
     if(isValid()){
        console.log('inside else condition')
-    axios.post(`http://localhost:5000/transactions`,payload)
+    axios.post(`http://localhost:5000/api/v1/transaction/add`,payload)
     .then((res) => {
       console.log(res.data)
-      axios.patch(`http://localhost:5000/customers/${sender?.customer_id}`,{
-        clear_balance : clearBalance
+      axios.patch(`http://localhost:5000/api/v1/customer/${sender?.customer_id}`,{
+          customerId: sender?.customer_id,
+          accountHolderName: sender?.account_holder_name,
+          overDraftFlag: sender?.overdraft?.toUpperCase() === "YES" ? 1 : 0,
+          clearBalance: clearBalance,
+          transferType: null
       }).then((r) => {
         console.log('sender clear balance also updated')
         cleanTransactionState()
@@ -566,7 +559,7 @@ export default function TransactionForm() {
         >
           {
             messages.length > 0 && messages.map((m) => {
-              return <MenuItem key ={m.id} value={m.id}>{m.id}</MenuItem>
+              return <MenuItem key ={m.messageCode} value={m.messageCode}>{m.messageCode}</MenuItem>
             })
           }
           

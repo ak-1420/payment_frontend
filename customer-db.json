@@ -1,0 +1,289 @@
+[
+        {
+         "customer_id": "83020817828620",
+         "account_holder_name": "A KRISHNA MOHAN",
+         "clear_balance": 56000,
+         "transfer_type": "Customer Transfer",
+         "over_draft_flag": 1
+        },
+        {
+         "customer_id": "71319440983198",
+         "account_holder_name": "A M MAYANNA",
+         "clear_balance": 224000,
+         "transfer_type": "Bank Transfer",
+         "over_draft_flag": 0
+        },
+        {
+         "customer_id": "69652133523248",
+         "account_holder_name": "HDFC BANK -(CHENNAI)",
+         "clear_balance": 223997,
+         "transfer_type": "Bank Transfer for Own Account",
+         "over_draft_flag": 1
+        },
+        {
+         "customer_id": "78195245302715",
+         "account_holder_name": "A RAJESH KUMAR",
+         "clear_balance": 35000,
+         "over_draft_flag": 1,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "47468155457802",
+         "account_holder_name": "A S VIJAY KUMAR",
+         "clear_balance": 56000,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "45766734966995",
+         "account_holder_name": "ABHISHEK BIYANI",
+         "clear_balance": 224000,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "87139550565094",
+         "account_holder_name": "ABHITHA",
+         "clear_balance": 223997,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "39145971759304",
+         "account_holder_name": "ABRAHAM VARGHESE",
+         "clear_balance": 5200,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "83411975607693",
+         "account_holder_name": "ABY GEORGE",
+         "clear_balance": 15400,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "45002608912874",
+         "account_holder_name": "HDFC BANK -(MUMBAI)",
+         "clear_balance": 56001,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "15510851190541",
+         "account_holder_name": "AJAY SHAMU KUMAR",
+         "clear_balance": 224004,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "64059555180495",
+         "account_holder_name": "AKSHAYA WEALTH MANAGEMENT (P) LTD",
+         "clear_balance": 224001,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "42895235807723",
+         "account_holder_name": "HDFC BANK -(DELHI)",
+         "clear_balance": 1120005,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "34835543999244",
+         "account_holder_name": "ANAND L S",
+         "clear_balance": 56001,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "76396804083946",
+         "account_holder_name": "ANANTHAKUMAR",
+         "clear_balance": 224004,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "14783038759432",
+         "account_holder_name": "ANANTHAMURTHY SHAMASUNDARA",
+         "clear_balance": 100,
+         "over_draft_flag": 1,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "87030077359017",
+         "account_holder_name": "ANIL GUPTA",
+         "clear_balance": 25600,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "37437137526069",
+         "account_holder_name": "ANIL KUMAR",
+         "clear_balance": 35800,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "69443662887399",
+         "account_holder_name": "ANIL KUMAR NAGARAJ",
+         "clear_balance": 56001,
+         "over_draft_flag": 1,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "27216037942722",
+         "account_holder_name": "HDFC BANK -(GOA)",
+         "clear_balance": 224004,
+         "over_draft_flag": 1,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "77236671175938",
+         "account_holder_name": "ANIL V GORUR",
+         "clear_balance": 224001,
+         "over_draft_flag": 1,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "79594243111085",
+         "account_holder_name": "ANITA B MEHTA",
+         "clear_balance": -25000,
+         "over_draft_flag": 1,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "46957845854316",
+         "account_holder_name": "ANITHA B ASHWATH",
+         "clear_balance": 56001,
+         "over_draft_flag": 1,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "61331727051606",
+         "account_holder_name": "ANJAN KUMAR G",
+         "clear_balance": 224004,
+         "over_draft_flag": 1,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "64754104823235",
+         "account_holder_name": "ANKITA BANERJEE",
+         "clear_balance": 224001,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "80505259371358",
+         "account_holder_name": "ANNUKA NIRVAN",
+         "clear_balance": 76334,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "63615912257030",
+         "account_holder_name": "ANU",
+         "clear_balance": 76334,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "13645221972859",
+         "account_holder_name": "ANUPAMA N",
+         "clear_balance": 95000,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "17308739433267",
+         "account_holder_name": "AREEFIKBAL T F",
+         "clear_balance": 65000,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "57577094248867",
+         "account_holder_name": "ARJUN PARAMESWARA",
+         "clear_balance": 508250,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "89479615455884",
+         "account_holder_name": "ARPITHA M S",
+         "clear_balance": -350,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "27225043545104",
+         "account_holder_name": "ASADI LINGAREDDY",
+         "clear_balance": 1556002,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "20050293665889",
+         "account_holder_name": "ASHAJYOTHI M",
+         "clear_balance": 224008,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "81181212472499",
+         "account_holder_name": "ASHISH MISHRA",
+         "clear_balance": 224005,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "71928505646815",
+         "account_holder_name": "ASHOK H R",
+         "clear_balance": 46000,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "49823469696097",
+         "account_holder_name": "ASHOKA AR",
+         "clear_balance": 56200,
+         "over_draft_flag": 1,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "98196009547795",
+         "account_holder_name": "AVISHEK MUKHERJEE",
+         "clear_balance": 56002,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "79029264231605",
+         "account_holder_name": "AYISHA KAUSAR",
+         "clear_balance": 224008,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "53853797183656",
+         "account_holder_name": "B A SANTOSH",
+         "clear_balance": 224005,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "57792220815896",
+         "account_holder_name": "B JAYARAM",
+         "clear_balance": 1120025,
+         "over_draft_flag": 0,
+         "transfer_type" : null
+        },
+        {
+         "customer_id": "72153770404022",
+         "account_holder_name": "B PRAKASH BABU",
+         "clear_balance": 0,
+         "over_draft_flag": 1,
+         "transfer_type" : null
+        }
+]
