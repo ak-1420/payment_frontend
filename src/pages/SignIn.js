@@ -3,14 +3,14 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import {Link as MuiLink} from '@mui/material';
+import {Alert, Link as MuiLink} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -28,14 +28,40 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+
+
+  const [error , setError] = React.useState({
+    isError: false ,
+    message: ""
+  })
+
+  let navigate = useNavigate()
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const employeeId = data.get('employeeid')
+    const password = data.get('password')
+    if(employeeId === "514111" && password === "514111"){
+      localStorage.setItem('emp_id' , employeeId)
+      localStorage.setItem("is_logged" , true)
+      navigate('/')
+    }
+    else
+    {
+      setError({
+        isError: true ,
+        message : "invalid credentials"
+      })
+    }
   };
+
+ React.useEffect(() => {
+  if(localStorage.getItem("emp_id") !== null){
+    navigate('/')
+  }
+ })
 
   return (
     <ThemeProvider theme={theme}>
@@ -57,35 +83,18 @@ export default function SignIn() {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
+              
+            <Grid item xs={12}>
+        {(error?.isError && error?.message != "") && <Alert severity="error">{error?.message}</Alert>}
+        </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="employeeId"
+                  label="Employee Id"
+                  name="employeeid"
                 />
               </Grid>
               <Grid item xs={12}>

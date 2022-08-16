@@ -2,8 +2,9 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import DateInput from '../components/DateInput';
-import { Button, FormControl, InputLabel, MenuItem, Select , Alert, Grid, Divider} from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select , Alert, Grid, Divider, SliderValueLabel} from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -16,6 +17,14 @@ export default function TransactionForm() {
   const [receivers , setReceivers] = React.useState([])
 
   const [messages , setMessages] = React.useState([])
+
+  let navigate = useNavigate()
+
+  React.useEffect(() => {
+    if(localStorage.getItem("emp_id") === null){
+      navigate('/signin')
+    }
+   },[localStorage.getItem("emp_id")])
 
   React.useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/message/all`).then((res) => {
@@ -58,6 +67,46 @@ export default function TransactionForm() {
     account_holder_name : "",
     account_holder_number : ""
   })
+
+
+  const searchSDN  = async (name) => {
+      // step split names
+      const words = name.split(" ");
+
+      const results =  words.map( (word) => {
+         return axios.get(`http://localhost:5000/api/v1/customer/sdn/${word}`)
+         .then((res) => {
+           const rs = res.data 
+           return (rs === true || rs == "true")
+         }).catch((err) => {
+           console.log("unable to search sdn word")
+           return false
+         })
+      })
+    
+      const rs = await Promise.all(results)
+
+      console.log('blocked customer :' , !rs.includes(false))
+      
+      return !rs.includes(false)
+  }
+
+  React.useEffect( () => {
+
+       if(searchSDN(receiver.account_holder_name)){
+         console.log('sdn list working !!')
+         setError({
+           isError: true,
+           message: "transaction is blocked"
+         })
+       }
+       else{
+        setError({
+          isError: false,
+          message: ""
+        })
+       }
+  },[receiver.account_holder_name])
 
   const [transferType , setTransferType] = React.useState("")
 
@@ -304,7 +353,8 @@ export default function TransactionForm() {
   }
 
   const makeTransaction = () => {
-   
+
+  
     const payload = {
       customerId : sender?.customer_id,
       receiverBIC : receiver?.bic,
@@ -325,6 +375,14 @@ export default function TransactionForm() {
       .then((res) => {
         console.log('failed transaction saved in the database')
       }).catch((err) => console.log('unable to save the failed transaction details'))
+      return
+    }
+
+    if(searchSDN(receiver.account_holder_name)){
+      setError({
+        isError : true ,
+        message: "transaction blocked"
+      })
       return
     }
      

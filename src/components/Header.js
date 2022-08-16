@@ -11,6 +11,20 @@ export default function Header() {
 
     const navigate = useNavigate();
 
+    const [user , setUser] = React.useState({
+      empId:null,
+      isLogged: null
+    })
+
+    React.useEffect(() => {
+      const empId = localStorage.getItem("emp_id")
+      const isLogged = localStorage.getItem("is_logged")
+      setUser({
+        empId,
+        isLogged
+      })
+    },[user.empId])
+
     const navigateToSignInPage = () => {
            navigate('/signin')
     }
@@ -19,6 +33,15 @@ export default function Header() {
         navigate('/signup')
  }
 
+
+ const signOut = () => {
+   localStorage.clear()
+   setUser({
+     empId: null,
+     isLogged: null
+   })
+   navigate('/signin')
+ }
 
     const navigateToHome = () => {
         navigate('/')
@@ -45,11 +68,11 @@ export default function Header() {
              Payment
           </Typography>
           <Box sx={{marginLeft : 'auto'}}>
-          <Button color="inherit" onClick={navigateToMakeTransaction}>Make a Transaction</Button>
-          <Button color="inherit" onClick={navigateToTransactionList} >Transactions List</Button>
-          <Button color="inherit" onClick={navigateToCustomerList} >Customers List</Button>
-          <Button color="inherit" onClick={navigateToSignInPage}>Sign In</Button>
-          <Button color="inherit" onClick={navigateToSignUpPage}>Sign Up</Button>
+          {(localStorage.getItem('emp_id') !== null) && <Button color="inherit" onClick={navigateToMakeTransaction}>Make a Transaction</Button>}
+          { (localStorage.getItem('emp_id') !== null) && <Button color="inherit" onClick={navigateToTransactionList} >Transactions List</Button>}
+          {(localStorage.getItem('emp_id') !== null) && <Button color="inherit" onClick={navigateToCustomerList} >Customers List</Button>}
+          {(localStorage.getItem('emp_id') === null) && <Button color="inherit" onClick={navigateToSignInPage}>Sign In</Button>}
+          {(localStorage.getItem('emp_id') !== null) && <Button color="inherit" onClick={signOut}>Sign out</Button>}
           </Box>
           
         </Toolbar>

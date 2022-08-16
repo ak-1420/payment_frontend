@@ -7,12 +7,21 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function CustomersList() {
 
   const [rows , setRows] = React.useState([])
+
+  let navigate = useNavigate()
+
+  React.useEffect(() => {
+    if(localStorage.getItem("emp_id") === null){
+      navigate('/signin')
+    }
+   },[localStorage.getItem("emp_id")])
 
   React.useEffect(() => {
      getCustomers()
