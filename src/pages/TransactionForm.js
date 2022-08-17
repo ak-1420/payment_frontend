@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import DateInput from '../components/DateInput';
-import { Button, FormControl, InputLabel, MenuItem, Select , Alert, Grid, Divider, SliderValueLabel} from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select , Alert, Grid} from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,6 +17,8 @@ export default function TransactionForm() {
   const [receivers , setReceivers] = React.useState([])
 
   const [messages , setMessages] = React.useState([])
+
+  const [blockError , setBlockError] = React.useState(false)
 
   let navigate = useNavigate()
 
@@ -87,25 +89,31 @@ export default function TransactionForm() {
       const rs = await Promise.all(results)
 
       console.log('blocked customer :' , !rs.includes(false))
+
+      console.log('words array: ' , rs)
       
       return !rs.includes(false)
   }
 
   React.useEffect( () => {
 
-       if(searchSDN(receiver.account_holder_name)){
-         console.log('sdn list working !!')
-         setError({
-           isError: true,
-           message: "transaction is blocked"
-         })
+       async function solveIt(){
+        const r = await searchSDN(receiver.account_holder_name)
+        setBlockError(r)
+        if(r){
+          setError({
+            isError: true,
+            message: "transaction is blocked"
+          })
+        }
+        else{
+          setError({
+            isError: false,
+            message: ""
+          })
+        }
        }
-       else{
-        setError({
-          isError: false,
-          message: ""
-        })
-       }
+       solveIt()
   },[receiver.account_holder_name])
 
   const [transferType , setTransferType] = React.useState("")
@@ -242,12 +250,15 @@ export default function TransactionForm() {
   },[receiver.bic])
 
   const handleReceiverAcNameChange = (e) => {
-        const {value} = e.target
-        setReceiver((prev) => ({
-          ...prev,
-          account_holder_name : value
-        }))
+    const {value} = e.target
+    setReceiver((prev) => ({
+      ...prev,
+      account_holder_name : value
+    }))
   }
+  
+    
+
 
   const handleReceiverAcNoChange = (e) => {
        const {value} = e.target
@@ -354,7 +365,6 @@ export default function TransactionForm() {
 
   const makeTransaction = () => {
 
-  
     const payload = {
       customerId : sender?.customer_id,
       receiverBIC : receiver?.bic,
@@ -378,14 +388,16 @@ export default function TransactionForm() {
       return
     }
 
-    if(searchSDN(receiver.account_holder_name)){
-      setError({
-        isError : true ,
-        message: "transaction blocked"
-      })
-      return
-    }
-     
+    
+        if(blockError){
+          payload.status = false
+          axios.post(`http://localhost:5000/api/v1/transaction/add`,payload)
+      .then((res) => {
+        console.log('failed transaction saved in the database')
+      }).catch((err) => console.log('unable to save the failed transaction details'))
+          return
+        }
+        
     if(isValid()){
        console.log('inside else condition')
     axios.post(`http://localhost:5000/api/v1/transaction/add`,payload)
@@ -411,6 +423,8 @@ export default function TransactionForm() {
     }
   }
 
+  console.log('is error : ' , error)
+
   return (
       <div style={{padding: '20px'}}>
     <Box
@@ -424,7 +438,11 @@ export default function TransactionForm() {
       <Grid container spacing={2}>
         
         <Grid item xs={12}>
-        {(error?.isError && error?.message != "") && <Alert severity="error">{error?.message}</Alert>}
+        {(error?.isError && error?.message !== "transaction is blocked") && <Alert severity="error">{error?.message}</Alert>}
+        </Grid>
+
+        <Grid item xs={12}>
+        {(blockError) && <Alert severity="error">Transaction Rejected</Alert>}
         </Grid>
      
 
